@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000  # ✅ Assurez-vous que ce champ est bien présent
+  type: NodePort
+  externalTrafficPolicy: Cluster  # ✅ Permet l'accès externe direct

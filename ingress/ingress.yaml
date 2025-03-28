@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k3s-ingress
+  annoctaions:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: monapp.local #url
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          name: frontend-service
+          ports:
+            number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            ports:
+              number: 8000
